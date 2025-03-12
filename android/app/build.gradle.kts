@@ -8,7 +8,6 @@ plugins {
 android {
     namespace = "com.example.tiny_weather"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
