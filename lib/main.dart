@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Tiny Weather',
+      debugShowCheckedModeBanner: false,
       theme: ZTheme(createTextTheme(context, 'Manrope', 'Manrope')).light(),
       routerConfig: router,
     );

@@ -28,19 +28,24 @@ class MainScreen extends ConsumerWidget {
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          spacing: 20,
           children: [
             IconButton(
               onPressed: () {
                 navigationShell.goBranch(0);
               },
-              icon: const Icon(Icons.home),
+              icon: const Icon(
+                Icons.home,
+                size: 32,
+              ),
             ),
             IconButton(
               onPressed: () {
                 navigationShell.goBranch(2);
               },
-              icon: const Icon(Icons.person),
+              icon: const Icon(
+                Icons.person,
+                size: 32,
+              ),
             ),
           ],
         ),

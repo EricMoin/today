@@ -1,5 +1,12 @@
 import "package:flutter/material.dart";
 
+
+class ZExtraTheme {
+  ZExtraTheme._();
+  static get finishedColor => Color.fromARGB(255, 127, 200, 68);
+}
+
+
 class ZTheme {
   final TextTheme textTheme;
 

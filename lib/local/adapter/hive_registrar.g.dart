@@ -7,7 +7,10 @@ import 'package:tiny_weather/local/adapter/hive_adapters.dart';
 
 extension HiveRegistrar on HiveInterface {
   void registerAdapters() {
+    registerAdapter(BaseInfoAdapter());
+    registerAdapter(BaseStateAdapter());
     registerAdapter(FlowAdapter());
+    registerAdapter(PlanAdapter());
     registerAdapter(TodoAdapter());
   }
 }

@@ -1,32 +1,19 @@
 import 'package:hive_ce_flutter/adapters.dart';
+import 'package:tiny_weather/local/model/info.dart';
 
 /// 用于周期性进行的任务
 /// 如每天的8:00提醒开始背单词
-class Plan extends HiveObject {
-  int firstCreateTime;
-  int lastModifiedTime;
-  int startAt;
-  int endAt;
-  String title;
-  String content;
-  PlanState state;
+class Plan extends BaseInfo {
+  int triggerTime;
   Plan({
-    required this.firstCreateTime,
-    required this.lastModifiedTime,
-    required this.startAt,
-    required this.endAt,
-    this.title = '',
-    this.content = '',
-    required this.state,
+    required super.uuid,
+    required super.firstCreateTime,
+    required super.lastModifiedTime,
+    required super.startAt,
+    required super.endAt,
+    required super.state,
+    required this.triggerTime,
+    super.title,
+    super.content,
   });
-}
-class PlanState {
-  final String state;
-  PlanState({required this.state});
-  /// Plan 刚开始创建
-  PlanState.initial({this.state = 'initial'});
-  /// Plan 开始工作
-  PlanState.enabled({this.state = ''});
-  /// Plan 到达结束时间,不再进行
-  PlanState.finished({this.state = ''});
 }

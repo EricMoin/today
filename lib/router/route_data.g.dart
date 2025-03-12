@@ -17,6 +17,13 @@ RouteBase get $mainScreenRoute => StatefulShellRouteData.$route(
           path: '/home',
 
           factory: $HomeScreenRouteExtension._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: 'detail/:uuid',
+
+              factory: $DetailScreenRouteExtension._fromState,
+            ),
+          ],
         ),
       ],
     ),
@@ -51,6 +58,23 @@ extension $HomeScreenRouteExtension on HomeScreenRoute {
       const HomeScreenRoute();
 
   String get location => GoRouteData.$location('/home');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $DetailScreenRouteExtension on DetailScreenRoute {
+  static DetailScreenRoute _fromState(GoRouterState state) =>
+      DetailScreenRoute(uuid: state.pathParameters['uuid']!);
+
+  String get location =>
+      GoRouteData.$location('/home/detail/${Uri.encodeComponent(uuid)}');
 
   void go(BuildContext context) => context.go(location);
 
