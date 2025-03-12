@@ -5,7 +5,8 @@ import 'package:tiny_weather/constant/util.dart';
 import 'package:tiny_weather/router/route_data.dart';
 import 'package:tiny_weather/router/router.dart';
 
-void main() {
+void main() async {
+  await InitsApp.
   runApp(
     const ProviderScope(
       child: MyApp(),
