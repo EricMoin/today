@@ -8,9 +8,16 @@ class ErrorScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     theme = Theme.of(context);
     return Scaffold(
-      body: Text(
-        '遇到了未知错误',
-        style: theme.textTheme.displayLarge,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          spacing: 10,
+          children: [
+            Icon(Icons.error_outline_outlined, size: 30),
+            Text('当前页面不存在', style: theme.textTheme.titleMedium),
+          ],
+        ),
       ),
     );
   }

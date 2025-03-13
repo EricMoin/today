@@ -2,7 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tiny_weather/local/model/info.dart';
 import 'package:tiny_weather/mock/mock.dart';
 import 'package:tiny_weather/local/model/todo.dart';
-part 'home_provider.g.dart';
+part 'todo_provider.g.dart';
 
 
 @riverpod
@@ -22,5 +22,8 @@ class TodoList extends _$TodoList {
     final updatedList = [...state];
     updatedList[index].updateState();
     state = updatedList;
+  }
+  Todo getTodo(String uuid){
+    return state.firstWhere((e) => e.uuid == uuid);
   }
 }

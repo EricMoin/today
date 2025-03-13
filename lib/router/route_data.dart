@@ -15,53 +15,31 @@ part 'route_data.g.dart';
 @TypedStatefulShellRoute<MainScreenRoute>(
   branches: [
     TypedStatefulShellBranch<HomeScreenBranch>(
-      routes: [
-        TypedGoRoute<HomeScreenRoute>(
-          path: '/home',
-          routes: [
-            // 在home分支下添加详情页路由
-            TypedGoRoute<DetailScreenRoute>(
-              path: 'detail/:uuid',
-            ),
-          ],
-        ),
-      ]
-    ),
-    TypedStatefulShellBranch<EditScreenBranch>(
-      routes: [
-        TypedGoRoute<EditScreenRoute>(
-          path: '/edit',
-        ),
-      ]
+      routes: [TypedGoRoute<HomeScreenRoute>(path: '/home', 
+        )],
     ),
     TypedStatefulShellBranch<UserScreenBranch>(
-      routes: [
-        TypedGoRoute<UserScreenRoute>(
-          path: '/user',
-        ),
-      ]
+      routes: [TypedGoRoute<UserScreenRoute>(path: '/user')],
     ),
-  ]
+  ],
 )
 // 在主路由之外添加错误页面路由
-@TypedGoRoute<ErrorScreenRoute>(
-  path: '/error',
-)
+@TypedGoRoute<ErrorScreenRoute>(path: '/error')
 class MainScreenRoute extends StatefulShellRouteData {
   const MainScreenRoute();
-  
+
   @override
-  Widget builder(BuildContext context, GoRouterState state, StatefulNavigationShell navigationShell) => 
-    MainScreen(navigationShell: navigationShell);
+  Widget builder(
+    BuildContext context,
+    GoRouterState state,
+    StatefulNavigationShell navigationShell,
+  ) => MainScreen(navigationShell: navigationShell);
 }
 
 class HomeScreenBranch extends StatefulShellBranchData {
   const HomeScreenBranch();
 }
 
-class EditScreenBranch extends StatefulShellBranchData {
-  const EditScreenBranch();
-}
 
 class UserScreenBranch extends StatefulShellBranchData {
   const UserScreenBranch();
@@ -69,14 +47,15 @@ class UserScreenBranch extends StatefulShellBranchData {
 
 class HomeScreenRoute extends GoRouteData {
   const HomeScreenRoute();
-  
+
   @override
   Widget build(BuildContext context, GoRouterState state) => HomeScreen();
 }
 
+@TypedGoRoute<EditScreenRoute>(path: '/edit')
 class EditScreenRoute extends GoRouteData {
   const EditScreenRoute();
-  
+
   @override
   Widget build(BuildContext context, GoRouterState state) => EditScreen();
 }
@@ -87,16 +66,17 @@ class UserScreenRoute extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) => UserScreen();
 }
 
+@TypedGoRoute<DetailScreenRoute>(path: '/detail/:uuid')
 class DetailScreenRoute extends GoRouteData {
   final String uuid;
-  
+
   const DetailScreenRoute({required this.uuid});
-  
+
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return TodoDetailScreen(uuid: uuid);
   }
-  
+
   @override
   FutureOr<String?> redirect(BuildContext context, GoRouterState state) {
     // 如果uuid为空或无效，重定向到错误页面
@@ -109,7 +89,7 @@ class DetailScreenRoute extends GoRouteData {
 
 class ErrorScreenRoute extends GoRouteData {
   const ErrorScreenRoute();
-  
+
   @override
   Widget build(BuildContext context, GoRouterState state) => ErrorScreen();
 }

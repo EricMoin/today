@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tiny_weather/router/route_data.dart';
 
 class MainScreen extends ConsumerWidget {
   final StatefulNavigationShell navigationShell;
@@ -15,7 +16,7 @@ class MainScreen extends ConsumerWidget {
         shape: CircleBorder(),
         elevation: 0,
         onPressed: () {
-          navigationShell.goBranch(1);
+          EditScreenRoute().push(context);
         },
         child: const Icon(Icons.edit),
       ),
@@ -40,7 +41,7 @@ class MainScreen extends ConsumerWidget {
             ),
             IconButton(
               onPressed: () {
-                navigationShell.goBranch(2);
+                navigationShell.goBranch(1);
               },
               icon: const Icon(
                 Icons.person,

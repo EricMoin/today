@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tiny_weather/features/home/components/todo_card.dart';
-import 'package:tiny_weather/features/home/providers/home_provider.dart';
+import 'package:tiny_weather/features/home/providers/todo_provider.dart';
+import 'package:tiny_weather/router/route_data.dart';
 
 class HomeScreen extends ConsumerWidget {
   late ThemeData theme;
@@ -27,7 +28,7 @@ class HomeScreen extends ConsumerWidget {
                   todo: todos[index],
                   isSelected: todos[index].state.isFinished,
                   onTap:(){
-                    
+                    DetailScreenRoute(uuid: todos[index].uuid).push(context);
                   },
                   onChanged: (value) {
                     if (value) {

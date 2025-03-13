@@ -6,7 +6,11 @@ part of 'route_data.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [$mainScreenRoute];
+List<RouteBase> get $appRoutes => [
+  $mainScreenRoute,
+  $editScreenRoute,
+  $detailScreenRoute,
+];
 
 RouteBase get $mainScreenRoute => StatefulShellRouteData.$route(
   factory: $MainScreenRouteExtension._fromState,
@@ -17,22 +21,6 @@ RouteBase get $mainScreenRoute => StatefulShellRouteData.$route(
           path: '/home',
 
           factory: $HomeScreenRouteExtension._fromState,
-          routes: [
-            GoRouteData.$route(
-              path: 'detail/:uuid',
-
-              factory: $DetailScreenRouteExtension._fromState,
-            ),
-          ],
-        ),
-      ],
-    ),
-    StatefulShellBranchData.$branch(
-      routes: [
-        GoRouteData.$route(
-          path: '/edit',
-
-          factory: $EditScreenRouteExtension._fromState,
         ),
       ],
     ),
@@ -69,12 +57,11 @@ extension $HomeScreenRouteExtension on HomeScreenRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $DetailScreenRouteExtension on DetailScreenRoute {
-  static DetailScreenRoute _fromState(GoRouterState state) =>
-      DetailScreenRoute(uuid: state.pathParameters['uuid']!);
+extension $UserScreenRouteExtension on UserScreenRoute {
+  static UserScreenRoute _fromState(GoRouterState state) =>
+      const UserScreenRoute();
 
-  String get location =>
-      GoRouteData.$location('/home/detail/${Uri.encodeComponent(uuid)}');
+  String get location => GoRouteData.$location('/user');
 
   void go(BuildContext context) => context.go(location);
 
@@ -85,6 +72,12 @@ extension $DetailScreenRouteExtension on DetailScreenRoute {
 
   void replace(BuildContext context) => context.replace(location);
 }
+
+RouteBase get $editScreenRoute => GoRouteData.$route(
+  path: '/edit',
+
+  factory: $EditScreenRouteExtension._fromState,
+);
 
 extension $EditScreenRouteExtension on EditScreenRoute {
   static EditScreenRoute _fromState(GoRouterState state) =>
@@ -102,11 +95,18 @@ extension $EditScreenRouteExtension on EditScreenRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $UserScreenRouteExtension on UserScreenRoute {
-  static UserScreenRoute _fromState(GoRouterState state) =>
-      const UserScreenRoute();
+RouteBase get $detailScreenRoute => GoRouteData.$route(
+  path: '/detail/:uuid',
 
-  String get location => GoRouteData.$location('/user');
+  factory: $DetailScreenRouteExtension._fromState,
+);
+
+extension $DetailScreenRouteExtension on DetailScreenRoute {
+  static DetailScreenRoute _fromState(GoRouterState state) =>
+      DetailScreenRoute(uuid: state.pathParameters['uuid']!);
+
+  String get location =>
+      GoRouteData.$location('/detail/${Uri.encodeComponent(uuid)}');
 
   void go(BuildContext context) => context.go(location);
 

@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'home_provider.dart';
+part of 'todo_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$todoListHash() => r'875237e69b286d120bbfc16dc8f752fc597529bb';
+String _$todoListHash() => r'cba842fe3d6028d7fc04e3820e29338164cd41d8';
 
 /// See also [TodoList].
 @ProviderFor(TodoList)
