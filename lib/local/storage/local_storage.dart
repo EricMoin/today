@@ -12,7 +12,7 @@ class LocalStorage {
     return;
   }
   static T? get<T>({required BoxKey key}){
-    return _box.get(key.name);
+    return _box.get(key.name) as T?;
   }
   static Future<void> clear() async {
     await _box.clear();

@@ -16,7 +16,7 @@ class MainScreen extends ConsumerWidget {
         shape: CircleBorder(),
         elevation: 0,
         onPressed: () {
-          EditScreenRoute().push(context);
+          EditScreenSelectRoute().push(context);
         },
         child: const Icon(Icons.edit),
       ),
