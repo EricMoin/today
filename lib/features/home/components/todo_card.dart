@@ -9,13 +9,17 @@ import 'package:tiny_weather/local/model/todo.dart';
 class TodoCard extends StatelessWidget {
   final Todo todo;
   bool isSelected;
+  bool isFinished;
   ValueChanged? onChanged;
   void Function()? onTap;
+  void Function()? onLongPress;
   TodoCard({
     required this.todo,
     required this.isSelected,
+    required this.isFinished,
     this.onChanged,
     this.onTap,
+    this.onLongPress,
   });
   late ThemeData theme;
   @override
@@ -33,15 +37,19 @@ class TodoCard extends StatelessWidget {
       default:
         containerColor = theme.colorScheme.surfaceContainerHigh;
     }
+    if(isSelected){
+      containerColor = theme.colorScheme.tertiaryContainer;
+    }
     return InkContainer(
       onTap: onTap,
+      onLongPress: onLongPress,
       padding: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
       decoration: BoxDecoration(
         color: containerColor,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           todo.state.isFailed
               ? IconButton(
@@ -52,7 +60,7 @@ class TodoCard extends StatelessWidget {
                 ),
               )
               : Checkbox.adaptive(
-                value: isSelected,
+                value: isFinished,
                 activeColor: containerColor,
                 onChanged: (value) {
                   onChanged?.call(value);

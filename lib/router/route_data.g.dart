@@ -8,45 +8,25 @@ part of 'route_data.dart';
 
 List<RouteBase> get $appRoutes => [
   $mainScreenRoute,
-  $editScreenRoute,
+  $editScreenSelectRoute,
+  $editTodoRoute,
+  $editFlowRoute,
+  $editPlanRoute,
   $detailScreenRoute,
   $errorScreenRoute,
 ];
 
-RouteBase get $mainScreenRoute => StatefulShellRouteData.$route(
+RouteBase get $mainScreenRoute => GoRouteData.$route(
+  path: '/',
+
   factory: $MainScreenRouteExtension._fromState,
-  branches: [
-    StatefulShellBranchData.$branch(
-      routes: [
-        GoRouteData.$route(
-          path: '/home',
-
-          factory: $HomeScreenRouteExtension._fromState,
-        ),
-      ],
-    ),
-    StatefulShellBranchData.$branch(
-      routes: [
-        GoRouteData.$route(
-          path: '/user',
-
-          factory: $UserScreenRouteExtension._fromState,
-        ),
-      ],
-    ),
-  ],
 );
 
 extension $MainScreenRouteExtension on MainScreenRoute {
   static MainScreenRoute _fromState(GoRouterState state) =>
       const MainScreenRoute();
-}
 
-extension $HomeScreenRouteExtension on HomeScreenRoute {
-  static HomeScreenRoute _fromState(GoRouterState state) =>
-      const HomeScreenRoute();
-
-  String get location => GoRouteData.$location('/home');
+  String get location => GoRouteData.$location('/');
 
   void go(BuildContext context) => context.go(location);
 
@@ -58,68 +38,11 @@ extension $HomeScreenRouteExtension on HomeScreenRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $UserScreenRouteExtension on UserScreenRoute {
-  static UserScreenRoute _fromState(GoRouterState state) =>
-      const UserScreenRoute();
+RouteBase get $editScreenSelectRoute => GoRouteData.$route(
+  path: '/edit/select',
 
-  String get location => GoRouteData.$location('/user');
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-RouteBase get $editScreenRoute => StatefulShellRouteData.$route(
-  factory: $EditScreenRouteExtension._fromState,
-  branches: [
-    StatefulShellBranchData.$branch(
-      routes: [
-        GoRouteData.$route(
-          path: '/edit/select',
-
-          factory: $EditScreenSelectRouteExtension._fromState,
-        ),
-      ],
-    ),
-    StatefulShellBranchData.$branch(
-      routes: [
-        GoRouteData.$route(
-          path: '/edit/todo',
-
-          factory: $EditTodoRouteExtension._fromState,
-        ),
-      ],
-    ),
-    StatefulShellBranchData.$branch(
-      routes: [
-        GoRouteData.$route(
-          path: '/edit/flow',
-
-          factory: $EditFlowRouteExtension._fromState,
-        ),
-      ],
-    ),
-    StatefulShellBranchData.$branch(
-      routes: [
-        GoRouteData.$route(
-          path: '/edit/plan',
-
-          factory: $EditPlanRouteExtension._fromState,
-        ),
-      ],
-    ),
-  ],
+  factory: $EditScreenSelectRouteExtension._fromState,
 );
-
-extension $EditScreenRouteExtension on EditScreenRoute {
-  static EditScreenRoute _fromState(GoRouterState state) =>
-      const EditScreenRoute();
-}
 
 extension $EditScreenSelectRouteExtension on EditScreenSelectRoute {
   static EditScreenSelectRoute _fromState(GoRouterState state) =>
@@ -137,6 +60,12 @@ extension $EditScreenSelectRouteExtension on EditScreenSelectRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
+RouteBase get $editTodoRoute => GoRouteData.$route(
+  path: '/edit/todo',
+
+  factory: $EditTodoRouteExtension._fromState,
+);
+
 extension $EditTodoRouteExtension on EditTodoRoute {
   static EditTodoRoute _fromState(GoRouterState state) => const EditTodoRoute();
 
@@ -152,6 +81,12 @@ extension $EditTodoRouteExtension on EditTodoRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
+RouteBase get $editFlowRoute => GoRouteData.$route(
+  path: '/edit/flow',
+
+  factory: $EditFlowRouteExtension._fromState,
+);
+
 extension $EditFlowRouteExtension on EditFlowRoute {
   static EditFlowRoute _fromState(GoRouterState state) => const EditFlowRoute();
 
@@ -166,6 +101,12 @@ extension $EditFlowRouteExtension on EditFlowRoute {
 
   void replace(BuildContext context) => context.replace(location);
 }
+
+RouteBase get $editPlanRoute => GoRouteData.$route(
+  path: '/edit/plan',
+
+  factory: $EditPlanRouteExtension._fromState,
+);
 
 extension $EditPlanRouteExtension on EditPlanRoute {
   static EditPlanRoute _fromState(GoRouterState state) => const EditPlanRoute();

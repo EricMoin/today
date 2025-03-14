@@ -24,10 +24,13 @@ class _TodoDetailScreenState extends ConsumerState<TodoDetailScreen>{
     return Scaffold(
       appBar: AppBar(
         actions: [
+          if( todo.state.isEnabled )
           IconButton(
-            icon: Icon(Icons.edit),
+            icon: Icon(Icons.check),
             onPressed: (){
-
+              ref.read(todoListProvider.notifier).finishedTodo(
+                ref.watch(todoListProvider).indexOf(todo)
+              );
             },
           ),
           // const SizedBox(width: 10,),

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tiny_weather/features/edit/edit_screen.dart';
 import 'package:tiny_weather/features/edit/pages/edit_select_screen.dart';
 import 'package:tiny_weather/features/edit/pages/edit_todo_screen.dart';
 import 'package:tiny_weather/features/edit/pages/edit_flow_screen.dart';
@@ -16,88 +15,16 @@ import 'package:tiny_weather/features/home/home_screen.dart';
 // This part declaration will be used by the code generator
 part 'route_data.g.dart';
 
-@TypedStatefulShellRoute<MainScreenRoute>(
-  branches: [
-    TypedStatefulShellBranch<HomeScreenBranch>(
-      routes: [TypedGoRoute<HomeScreenRoute>(path: '/home')],
-    ),
-    TypedStatefulShellBranch<UserScreenBranch>(
-      routes: [TypedGoRoute<UserScreenRoute>(path: '/user')],
-    ),
-  ],
-)
-class MainScreenRoute extends StatefulShellRouteData {
+@TypedGoRoute<MainScreenRoute>(path: '/')
+class MainScreenRoute extends GoRouteData {
   const MainScreenRoute();
-
   @override
-  Widget builder(
+  Widget build(
     BuildContext context,
     GoRouterState state,
-    StatefulNavigationShell navigationShell,
-  ) => MainScreen(navigationShell: navigationShell);
+  ) => MainScreen();
 }
-
-class HomeScreenBranch extends StatefulShellBranchData {
-  const HomeScreenBranch();
-}
-
-class UserScreenBranch extends StatefulShellBranchData {
-  const UserScreenBranch();
-}
-
-class HomeScreenRoute extends GoRouteData {
-  const HomeScreenRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) => HomeScreen();
-}
-
-@TypedStatefulShellRoute<EditScreenRoute>(
-  branches: [
-    TypedStatefulShellBranch<EditScreenSelectBranch>(
-      routes: [
-        TypedGoRoute<EditScreenSelectRoute>(
-          path: '/edit/select',
-        ),
-      ],
-    ),
-    TypedStatefulShellBranch<EditTodoBranch>(
-      routes: [
-        TypedGoRoute<EditTodoRoute>(
-          path: '/edit/todo',
-        ),
-      ],
-    ),
-    TypedStatefulShellBranch<EditFlowBranch>(
-      routes: [
-        TypedGoRoute<EditFlowRoute>(
-          path: '/edit/flow',
-        ),
-      ],
-    ),
-    TypedStatefulShellBranch<EditPlanBranch>(
-      routes: [
-        TypedGoRoute<EditPlanRoute>(
-          path: '/edit/plan',
-        ),
-      ],
-    ),
-  ],
-)
-class EditScreenRoute extends StatefulShellRouteData {
-  const EditScreenRoute();
-  @override
-  Widget builder(
-    BuildContext context,
-    GoRouterState state,
-    StatefulNavigationShell navigationShell,
-  ) => EditScreen(navigationShell: navigationShell);
-}
-
-class EditScreenSelectBranch extends StatefulShellBranchData{
-  const EditScreenSelectBranch();
-}
-
+@TypedGoRoute<EditScreenSelectRoute>(path: '/edit/select')
 class EditScreenSelectRoute extends GoRouteData{
   const EditScreenSelectRoute();
   
@@ -105,10 +32,7 @@ class EditScreenSelectRoute extends GoRouteData{
   Widget build(BuildContext context,GoRouterState state) => EditSelectScreen();
 }
 
-class EditTodoBranch extends StatefulShellBranchData{
-  const EditTodoBranch();
-}
-
+@TypedGoRoute<EditTodoRoute>(path: '/edit/todo')
 class EditTodoRoute extends GoRouteData{
   const EditTodoRoute();
   
@@ -116,21 +40,14 @@ class EditTodoRoute extends GoRouteData{
   Widget build(BuildContext context,GoRouterState state) => EditTodoScreen();
 }
 
-class EditFlowBranch extends StatefulShellBranchData{
-  const EditFlowBranch();
-}
-
+@TypedGoRoute<EditFlowRoute>(path: '/edit/flow')
 class EditFlowRoute extends GoRouteData{
   const EditFlowRoute();
-  
   @override
   Widget build(BuildContext context,GoRouterState state) => EditFlowScreen();
 }
 
-class EditPlanBranch extends StatefulShellBranchData{
-  const EditPlanBranch();
-}
-
+@TypedGoRoute<EditPlanRoute>(path: '/edit/plan')
 class EditPlanRoute extends GoRouteData{
   const EditPlanRoute();
   

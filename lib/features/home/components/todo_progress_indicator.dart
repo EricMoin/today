@@ -62,8 +62,9 @@ class TodoProgressIndicator extends StatelessWidget {
                         );
                       case BaseState.fail:
                         return Icon(
-                          Icons.cancel_rounded,
-                          size: theme.textTheme.displaySmall?.fontSize,
+                          Icons.close,
+                          size: theme.textTheme.displayLarge?.fontSize,
+                          color: theme.colorScheme.error,
                         );
                     }
                     return Text.rich(

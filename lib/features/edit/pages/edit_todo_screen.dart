@@ -87,7 +87,7 @@ class _EditTodoScreenState extends ConsumerState<EditTodoScreen> {
                         state: BaseState.intialized(),
                       ),
                     );
-                HomeScreenRoute().go(context);
+                context.pop();
                 Fluttertoast.showToast(msg: 'Successfully created todo');
               }
             },
@@ -143,7 +143,7 @@ class _EditTodoScreenState extends ConsumerState<EditTodoScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Start Time', style: theme.textTheme.titleSmall),
+                        Text('Start Date', style: theme.textTheme.titleSmall),
                         TextButton(
                           onPressed: () async {
                             final DateTime? picked = await showDatePicker(
@@ -173,13 +173,13 @@ class _EditTodoScreenState extends ConsumerState<EditTodoScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('End Time', style: theme.textTheme.titleSmall),
+                        Text('End Date', style: theme.textTheme.titleSmall),
                         TextButton(
                           onPressed: () async {
                             final DateTime? picked = await showDatePicker(
                               context: context,
                               initialDate: endTime,
-                              firstDate: DateTime.now(),
+                              firstDate: DateTime(1900),
                               lastDate: DateTime.now().add(
                                 Duration(days: 3600),
                               ),

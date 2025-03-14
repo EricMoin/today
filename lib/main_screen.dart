@@ -2,55 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tiny_weather/features/home/home_screen.dart';
 import 'package:tiny_weather/router/route_data.dart';
 
 class MainScreen extends ConsumerWidget {
-  final StatefulNavigationShell navigationShell;
-  const MainScreen({super.key, required this.navigationShell});
+  const MainScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: navigationShell,
-      floatingActionButton: FloatingActionButton(
-        shape: CircleBorder(),
-        elevation: 0,
-        onPressed: () {
-          EditScreenSelectRoute().push(context);
-        },
-        child: const Icon(Icons.edit),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 5,
-        height: 50,
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            IconButton(
-              onPressed: () {
-                navigationShell.goBranch(0);
-              },
-              icon: const Icon(
-                Icons.home,
-                size: 32,
-              ),
-            ),
-            IconButton(
-              onPressed: () {
-                navigationShell.goBranch(1);
-              },
-              icon: const Icon(
-                Icons.person,
-                size: 32,
-              ),
-            ),
-          ],
-        ),
-      ),
+      body: HomeScreen(),
     );
   }
 }

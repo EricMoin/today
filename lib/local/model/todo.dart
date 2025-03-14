@@ -17,11 +17,11 @@ class Todo extends BaseInfo {
   void updateState(){
     var now = DateTime.now();
     var startTime = DateTime.fromMillisecondsSinceEpoch(startAt);
-    var endTime = DateTime.fromMillisecondsSinceEpoch(startAt);
+    var endTime = DateTime.fromMillisecondsSinceEpoch(endAt);
 
     /// 失效 限定时间没有完成Todo
     if( now.isAfter(endTime)  ){
-      state = BaseState.intialized();
+      state = BaseState.failed();
       return;
     }
     /// Todo 的时间还没开始
