@@ -12,7 +12,8 @@ List<RouteBase> get $appRoutes => [
   $editTodoRoute,
   $editFlowRoute,
   $editPlanRoute,
-  $detailScreenRoute,
+  $todoDetailScreenRoute,
+  $flowDetailScreenRoute,
   $errorScreenRoute,
 ];
 
@@ -123,18 +124,41 @@ extension $EditPlanRouteExtension on EditPlanRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-RouteBase get $detailScreenRoute => GoRouteData.$route(
-  path: '/detail/:uuid',
+RouteBase get $todoDetailScreenRoute => GoRouteData.$route(
+  path: '/todo/:uuid',
 
-  factory: $DetailScreenRouteExtension._fromState,
+  factory: $TodoDetailScreenRouteExtension._fromState,
 );
 
-extension $DetailScreenRouteExtension on DetailScreenRoute {
-  static DetailScreenRoute _fromState(GoRouterState state) =>
-      DetailScreenRoute(uuid: state.pathParameters['uuid']!);
+extension $TodoDetailScreenRouteExtension on TodoDetailScreenRoute {
+  static TodoDetailScreenRoute _fromState(GoRouterState state) =>
+      TodoDetailScreenRoute(uuid: state.pathParameters['uuid']!);
 
   String get location =>
-      GoRouteData.$location('/detail/${Uri.encodeComponent(uuid)}');
+      GoRouteData.$location('/todo/${Uri.encodeComponent(uuid)}');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $flowDetailScreenRoute => GoRouteData.$route(
+  path: '/flow/:uuid',
+
+  factory: $FlowDetailScreenRouteExtension._fromState,
+);
+
+extension $FlowDetailScreenRouteExtension on FlowDetailScreenRoute {
+  static FlowDetailScreenRoute _fromState(GoRouterState state) =>
+      FlowDetailScreenRoute(uuid: state.pathParameters['uuid']!);
+
+  String get location =>
+      GoRouteData.$location('/flow/${Uri.encodeComponent(uuid)}');
 
   void go(BuildContext context) => context.go(location);
 

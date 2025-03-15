@@ -6,7 +6,7 @@ part of 'flow_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$flowListHash() => r'50d1c2d79cc6e0f41f151091c9fd66895a5a1e2e';
+String _$flowListHash() => r'0e8b815b778b8704f0f9fb94b8114e01cc5cc513';
 
 /// See also [FlowList].
 @ProviderFor(FlowList)

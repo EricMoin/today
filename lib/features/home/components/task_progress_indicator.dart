@@ -6,14 +6,12 @@ class TodoProgressIndicator extends StatelessWidget {
   late ThemeData theme;
   int startAt;
   int endAt;
+  double progress;
   BaseState state;
-  TodoProgressIndicator({this.startAt=0,this.endAt=0, required this.state});
+  TodoProgressIndicator({this.startAt=0,this.endAt=0, required this.state, this.progress=0});
   @override
   Widget build(BuildContext context) {
     theme = Theme.of(context);
-    var progress = ( DateTime.now().millisecondsSinceEpoch - startAt ) / (endAt - startAt);
-    progress = progress < 0 ? 0 : progress;
-    progress = progress > 1 ? 1 : progress;
     final width = MediaQuery.sizeOf(context).width;
     var color = theme.colorScheme.primary;
     switch (state.state) {
@@ -52,7 +50,7 @@ class TodoProgressIndicator extends StatelessWidget {
                         unit = 'Day';
                         break;
                       case BaseState.enable:
-                        value = progress.toStringAsFixed(0);
+                        value = (progress * 100).toStringAsFixed(0);
                         unit = '%';
                       case BaseState.finish:
                         return Icon(

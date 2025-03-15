@@ -9,8 +9,8 @@ class Flow extends BaseInfo{
     required super.uuid,
     required super.firstCreateTime,
     required super.lastModifiedTime,
-    required super.startAt,
-    required super.endAt,
+    super.startAt = 0,
+    super.endAt = 0,
     required super.state,
     super.title,
     super.content,
@@ -26,29 +26,26 @@ class Flow extends BaseInfo{
   /// 6.initial            => initial
   void updateState(){
     int length = todos.length;
+    var now = DateTime.now().millisecondsSinceEpoch;
+    /// 还未到开始时间
+    if( now < startAt ){
+      state = BaseState.intialized();
+      return;
+    }
+    /// 已经过了结束时间
+    if( now > endAt ){
+      state = BaseState.failed();
+      return;
+    }
+
+    /// 在开始和结束之间
+    if( now > startAt && now < endAt ){
+      state = BaseState.enabled();
+      return;
+    }
 
     /// 当且仅当所有的Todo完成时才算完成当前Flow
-    int finished = 0;
-
-    for(var i = 0; i < length; ++i){
-      switch(todos[i].state.state){
-        case BaseState.initial:
-          state = BaseState.intialized();
-          break;
-        case BaseState.enable:
-          state = BaseState.enabled();
-          break;
-        case BaseState.finish:
-          ++finished;
-          break;
-        case BaseState.fail:
-          state = BaseState.failed();
-          return;
-        default:
-          break;
-      }
-    }
-    state = finished == length ? BaseState.finished() : state;
+    state = todos.every((e) => e.state.isFinished) ? BaseState.finished() : state;
     return;
   }
 }

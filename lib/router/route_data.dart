@@ -7,6 +7,7 @@ import 'package:tiny_weather/features/edit/pages/edit_todo_screen.dart';
 import 'package:tiny_weather/features/edit/pages/edit_flow_screen.dart';
 import 'package:tiny_weather/features/edit/pages/edit_plan_screen.dart';
 import 'package:tiny_weather/features/error/error_screen.dart';
+import 'package:tiny_weather/features/home/pages/flow_detail_screen.dart';
 import 'package:tiny_weather/features/home/pages/todo_detail_screen.dart';
 import 'package:tiny_weather/features/user/user_screen.dart';
 import 'package:tiny_weather/main_screen.dart';
@@ -61,11 +62,11 @@ class UserScreenRoute extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) => UserScreen();
 }
 
-@TypedGoRoute<DetailScreenRoute>(path: '/detail/:uuid')
-class DetailScreenRoute extends GoRouteData {
+@TypedGoRoute<TodoDetailScreenRoute>(path: '/todo/:uuid')
+class TodoDetailScreenRoute extends GoRouteData {
   final String uuid;
 
-  const DetailScreenRoute({required this.uuid});
+  const TodoDetailScreenRoute({required this.uuid});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
@@ -79,6 +80,18 @@ class DetailScreenRoute extends GoRouteData {
       return '/error';
     }
     return null;
+  }
+}
+
+@TypedGoRoute<FlowDetailScreenRoute>(path: '/flow/:uuid')
+class FlowDetailScreenRoute extends GoRouteData {
+  final String uuid;
+
+  const FlowDetailScreenRoute({required this.uuid});
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return FlowDetailScreen(uuid: uuid);
   }
 }
 
