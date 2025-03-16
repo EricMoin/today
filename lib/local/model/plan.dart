@@ -1,10 +1,9 @@
 import 'package:hive_ce_flutter/adapters.dart';
 import 'package:today/local/model/info.dart';
 
-/// 用于周期性进行的任务
-/// 如每天的8:00提醒开始背单词
+/// Used for recurring tasks
+/// Such as daily reminders at 8:00 AM to study vocabulary
 class Plan extends BaseInfo {
-  int triggerTime;
   Plan({
     required super.uuid,
     required super.firstCreateTime,
@@ -16,6 +15,9 @@ class Plan extends BaseInfo {
     super.title,
     super.content,
   });
+
+  /// Trigger time in milliseconds from midnight (e.g., 8:00 AM = 8 * 60 * 60 * 1000)
+  int triggerTime;
 
   void updateState(){
     if(state.isFinished){

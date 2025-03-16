@@ -1,8 +1,8 @@
 import 'package:hive_ce/hive.dart';
 import 'package:today/local/model/info.dart';
 
-/// 正常的一个Todo
-/// 主要用于在限定时间内完成某件单一的任务
+/// A standard Todo item
+/// Primarily used for completing a single task within a specified time frame
 class Todo extends BaseInfo {
   Todo({
     required super.uuid,
@@ -19,12 +19,12 @@ class Todo extends BaseInfo {
     var startTime = DateTime.fromMillisecondsSinceEpoch(startAt);
     var endTime = DateTime.fromMillisecondsSinceEpoch(endAt);
 
-    /// 失效 限定时间没有完成Todo
+    /// Failed - Todo was not completed within the specified time limit
     if( now.isAfter(endTime)  ){
       state = BaseState.failed();
       return;
     }
-    /// Todo 的时间还没开始
+    /// Todo's time has not yet started
     if( now.isBefore(startTime) ){
       state = BaseState.intialized();
       return;
@@ -33,8 +33,8 @@ class Todo extends BaseInfo {
       state = BaseState.enabled();
       return;
     }
-    /// 由于[finished]的状态需要手动确定
-    /// 所以这里直接就可以看作生效中
+    /// Since the [finished] state needs to be manually confirmed
+    /// We can simply consider it as being active
     state = BaseState.intialized();
   }
 }

@@ -24,18 +24,14 @@ class SwitchType extends _$SwitchType{
 class TodoList extends _$TodoList {
   @override
   List<Todo> build() {
-    /// 从本地存储中取出的时候得更新所有的Todo
+    /// Need to update all Todos when retrieved from local storage
     List<Todo>? todos = (LocalStorage.get<List?>(key: BoxKey.todos))?.cast<Todo>();
     if ( todos == null ){
       LocalStorage.put(key: BoxKey.todos, data: <Todo>[]);
+      return [];
     }
-    var updateTodos = todos ?? <Todo>[];
-    var length = updateTodos.length;
-    for( var index = 0 ; index < length; ++index ){
-      updateTodos[index].updateState();
-    }
-    LocalStorage.put(key: BoxKey.todos, data: updateTodos);
-    return updateTodos;
+    todos.forEach((e) => e.updateState());
+    return todos;
   }
   
   void finishedTodo(int index) {

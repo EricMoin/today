@@ -70,6 +70,7 @@ class _FlowCardState extends State<FlowCard> {
                   : Checkbox.adaptive(
                     value: widget.isFinished,
                     activeColor: containerColor,
+                    checkColor: widget.flow.state.isFinished ? Colors.white : null,
                     onChanged: (value) {
                       widget.onChanged?.call(value);
                     },

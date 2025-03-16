@@ -25,10 +25,8 @@ types:
         index: 15
   Flow:
     typeId: 1
-    nextIndex: 12
+    nextIndex: 14
     fields:
-      todos:
-        index: 2
       uuid:
         index: 4
       firstCreateTime:
@@ -45,6 +43,8 @@ types:
         index: 10
       state:
         index: 11
+      todos:
+        index: 13
   Plan:
     typeId: 2
     nextIndex: 16

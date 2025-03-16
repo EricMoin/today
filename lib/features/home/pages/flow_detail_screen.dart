@@ -23,7 +23,7 @@ class _FlowDetailScreenState extends ConsumerState<FlowDetailScreen> {
   @override
   Widget build(BuildContext context) {
     theme = Theme.of(context);
-    // 分别监听需要的状态
+    // Monitor the required states separately
     final isFinished = ref.watch(
       isCurrentFlowFinishedProvider(widget.uuid)
     );

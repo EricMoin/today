@@ -17,33 +17,33 @@ class PlanList extends _$PlanList {
     }
     return plans ?? [];
   }
-  Future<void> add(Plan plan) async {
-    final updatedList = [...state];
-    updatedList.add(plan);
-    state = updatedList;
-    LocalStorage.put(key: BoxKey.plans, data: state);
+  void add(Plan plan) {
+    // Add notification
+    NotificationSolver.schedulePlanNotification(plan);
     
-    // 添加通知
-    await NotificationSolver.schedulePlanNotification(plan);
+    state = [...state, plan];
+    LocalStorage.put(key: BoxKey.plans, data: state);
   }
-  Future<void> remove(String uuid) async {
-    final updatedList = [...state];
-    updatedList.removeWhere((e) => e.uuid == uuid);
-    state = updatedList;
-    LocalStorage.put(key: BoxKey.plans, data: state);
+  void remove(Plan plan) {
+    // Cancel notification
+    NotificationSolver.cancelPlanNotification(plan.uuid);
     
-    // 取消通知
-    await NotificationSolver.cancelPlanNotification(uuid);
+    state = [
+      for (final p in state)
+        if (p.uuid != plan.uuid) p,
+    ];
+    LocalStorage.put(key: BoxKey.plans, data: state);
   }
-  Future<void> update(Plan plan) async {
-    final updatedList = [...state];
-    updatedList.firstWhere((e) => e.uuid == plan.uuid).updateState();
-    state = updatedList;
-    LocalStorage.put(key: BoxKey.plans, data: state);
+  void update(Plan plan) {
+    // Update notification
+    NotificationSolver.cancelPlanNotification(plan.uuid);
+    NotificationSolver.schedulePlanNotification(plan);
     
-    // 更新通知
-    await NotificationSolver.cancelPlanNotification(plan.uuid);
-    await NotificationSolver.schedulePlanNotification(plan);
+    state = [
+      for (final p in state)
+        if (p.uuid == plan.uuid) plan else p,
+    ];
+    LocalStorage.put(key: BoxKey.plans, data: state);
   }
   Plan getPlan(String uuid) {
     return state.firstWhere((e) => e.uuid == uuid);

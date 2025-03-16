@@ -75,12 +75,12 @@ class FlowAdapter extends TypeAdapter<Flow> {
       uuid: fields[4] as String,
       firstCreateTime: (fields[5] as num).toInt(),
       lastModifiedTime: (fields[6] as num).toInt(),
-      startAt: fields[7] == null ? 0 : (fields[7] as num).toInt(),
-      endAt: fields[8] == null ? 0 : (fields[8] as num).toInt(),
+      startAt: (fields[7] as num).toInt(),
+      endAt: (fields[8] as num).toInt(),
       state: fields[11] as BaseState,
+      todos: fields[13] == null ? const [] : (fields[13] as List).cast<Todo>(),
       title: fields[9] == null ? '' : fields[9] as String,
       content: fields[10] == null ? '' : fields[10] as String,
-      todos: fields[2] == null ? const [] : (fields[2] as List).cast<Todo>(),
     );
   }
 
@@ -88,8 +88,6 @@ class FlowAdapter extends TypeAdapter<Flow> {
   void write(BinaryWriter writer, Flow obj) {
     writer
       ..writeByte(9)
-      ..writeByte(2)
-      ..write(obj.todos)
       ..writeByte(4)
       ..write(obj.uuid)
       ..writeByte(5)
@@ -105,7 +103,9 @@ class FlowAdapter extends TypeAdapter<Flow> {
       ..writeByte(10)
       ..write(obj.content)
       ..writeByte(11)
-      ..write(obj.state);
+      ..write(obj.state)
+      ..writeByte(13)
+      ..write(obj.todos);
   }
 
   @override

@@ -91,7 +91,7 @@ final switchTypeProvider =
     );
 
 typedef _$SwitchType = AutoDisposeNotifier<int>;
-String _$todoListHash() => r'92ff8a5091e00d32fb43f536b00baba77bc94241';
+String _$todoListHash() => r'44881c9c75c9df0877431e206c5d002dd3540217';
 
 /// See also [TodoList].
 @ProviderFor(TodoList)

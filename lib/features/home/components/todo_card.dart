@@ -62,6 +62,7 @@ class TodoCard extends StatelessWidget {
               : Checkbox.adaptive(
                 value: isFinished,
                 activeColor: containerColor,
+                checkColor: todo.state.isFinished ? Colors.white : null,
                 onChanged: (value) {
                   onChanged?.call(value);
                 },
