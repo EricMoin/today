@@ -1,7 +1,7 @@
-import 'package:tiny_weather/local/model/todo.dart';
-import 'package:tiny_weather/local/model/flow.dart';
-import 'package:tiny_weather/local/model/plan.dart';
-import 'package:tiny_weather/local/model/info.dart';
+import 'package:today/local/model/todo.dart';
+import 'package:today/local/model/flow.dart';
+import 'package:today/local/model/plan.dart';
+import 'package:today/local/model/info.dart';
 import 'package:uuid/uuid.dart';
 
 // 当前时间戳

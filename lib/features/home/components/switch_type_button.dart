@@ -3,7 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
-import 'package:tiny_weather/features/home/providers/todo_provider.dart';
+import 'package:today/features/home/providers/todo_provider.dart';
 
 class SwitchTypeButton extends ConsumerStatefulWidget {
   SwitchTypeEnum type;

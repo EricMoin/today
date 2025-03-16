@@ -1,5 +1,5 @@
 import 'package:hive_ce/hive.dart';
-import 'package:tiny_weather/local/key/local_key.dart';
+import 'package:today/local/key/local_key.dart';
 
 class LocalStorage {
   LocalStorage._();

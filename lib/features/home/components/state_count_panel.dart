@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tiny_weather/constant/theme.dart';
-import 'package:tiny_weather/features/home/providers/todo_provider.dart';
-import 'package:tiny_weather/mock/mock.dart';
+import 'package:today/constant/theme.dart';
+import 'package:today/features/home/providers/todo_provider.dart';
+import 'package:today/mock/mock.dart';
 
 class StateCountPanel extends ConsumerWidget {
   late ThemeData theme;

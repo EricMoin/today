@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tiny_weather/constant/theme.dart';
-import 'package:tiny_weather/constant/util.dart';
+import 'package:today/constant/theme.dart';
+import 'package:today/constant/util.dart';
 
 class ThemeManager {
   ThemeManager._();

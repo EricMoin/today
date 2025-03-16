@@ -1,14 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:tiny_weather/features/home/components/switch_type_button.dart';
-import 'package:tiny_weather/features/home/providers/flow_provider.dart';
-import 'package:tiny_weather/features/home/providers/plan_provider.dart';
-import 'package:tiny_weather/local/key/local_key.dart';
-import 'package:tiny_weather/local/model/info.dart';
-import 'package:tiny_weather/local/storage/local_storage.dart';
-import 'package:tiny_weather/mock/mock.dart';
-import 'package:tiny_weather/local/model/todo.dart';
+import 'package:today/features/home/components/switch_type_button.dart';
+import 'package:today/features/home/providers/flow_provider.dart';
+import 'package:today/features/home/providers/plan_provider.dart';
+import 'package:today/local/key/local_key.dart';
+import 'package:today/local/model/info.dart';
+import 'package:today/local/storage/local_storage.dart';
+import 'package:today/mock/mock.dart';
+import 'package:today/local/model/todo.dart';
 part 'todo_provider.g.dart';
 enum SwitchTypeEnum { todo, flow, plan }
 @riverpod

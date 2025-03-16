@@ -1,5 +1,5 @@
 import 'package:hive_ce/hive.dart';
-import 'package:tiny_weather/local/model/info.dart';
+import 'package:today/local/model/info.dart';
 
 /// 正常的一个Todo
 /// 主要用于在限定时间内完成某件单一的任务

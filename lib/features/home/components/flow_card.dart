@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart' hide Flow;
-import 'package:tiny_weather/constant/theme.dart';
-import 'package:tiny_weather/features/components/ink_container.dart';
-import 'package:tiny_weather/local/model/flow.dart';
-import 'package:tiny_weather/local/model/info.dart';
+import 'package:today/constant/theme.dart';
+import 'package:today/features/components/ink_container.dart';
+import 'package:today/local/model/flow.dart';
+import 'package:today/local/model/info.dart';
 
 class FlowCard extends StatefulWidget {
   final Flow flow;

@@ -1,11 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/web.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:tiny_weather/local/key/local_key.dart';
-import 'package:tiny_weather/local/model/flow.dart';
-import 'package:tiny_weather/local/model/info.dart';
-import 'package:tiny_weather/local/model/todo.dart';
-import 'package:tiny_weather/local/storage/local_storage.dart';
+import 'package:today/local/key/local_key.dart';
+import 'package:today/local/model/flow.dart';
+import 'package:today/local/model/info.dart';
+import 'package:today/local/model/todo.dart';
+import 'package:today/local/storage/local_storage.dart';
 part 'flow_provider.g.dart';
 @riverpod
 class FlowList extends _$FlowList {

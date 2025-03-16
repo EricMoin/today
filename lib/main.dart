@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:tiny_weather/constant/theme.dart';
-import 'package:tiny_weather/constant/theme_manager.dart';
-import 'package:tiny_weather/constant/util.dart';
-import 'package:tiny_weather/provider/global_provider.dart';
-import 'package:tiny_weather/router/router.dart';
-import 'package:tiny_weather/utils/init.dart';
+import 'package:today/constant/theme.dart';
+import 'package:today/constant/theme_manager.dart';
+import 'package:today/constant/util.dart';
+import 'package:today/provider/global_provider.dart';
+import 'package:today/router/router.dart';
+import 'package:today/utils/init.dart';
 void main() async {
   await InitApp.init();
   runApp(

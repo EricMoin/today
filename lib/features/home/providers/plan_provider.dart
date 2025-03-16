@@ -1,8 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:tiny_weather/local/key/local_key.dart';
-import 'package:tiny_weather/local/model/plan.dart';
-import 'package:tiny_weather/local/storage/local_storage.dart';
-import 'package:tiny_weather/utils/notification_solver.dart';
+import 'package:today/local/key/local_key.dart';
+import 'package:today/local/model/plan.dart';
+import 'package:today/local/storage/local_storage.dart';
+import 'package:today/utils/notification_solver.dart';
 part 'plan_provider.g.dart';
 @riverpod
 class PlanList extends _$PlanList {

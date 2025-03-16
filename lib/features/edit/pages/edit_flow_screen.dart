@@ -3,11 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:tiny_weather/features/home/components/todo_card.dart';
-import 'package:tiny_weather/features/home/providers/flow_provider.dart';
-import 'package:tiny_weather/local/model/flow.dart';
-import 'package:tiny_weather/local/model/info.dart';
-import 'package:tiny_weather/local/model/todo.dart';
+import 'package:today/features/home/components/todo_card.dart';
+import 'package:today/features/home/providers/flow_provider.dart';
+import 'package:today/local/model/flow.dart';
+import 'package:today/local/model/info.dart';
+import 'package:today/local/model/todo.dart';
 import 'package:uuid/uuid.dart';
 
 class EditFlowScreen extends ConsumerStatefulWidget {

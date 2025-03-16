@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:tiny_weather/constant/theme.dart';
+import 'package:today/constant/theme.dart';
 part 'global_provider.g.dart';
 
 enum ThemeState{

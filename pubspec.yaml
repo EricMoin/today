@@ -1,5 +1,5 @@
-name: tiny_weather
-description: "A tiny weather app with Flutter"
+name: today
+description: "A task management app for today's productivity"
 publish_to: 'none' 
 version: 1.0.0+1
 environment:
@@ -38,6 +38,7 @@ dev_dependencies:
   riverpod_lint: ^2.6.5
   go_router_builder: ^2.8.2
   build_runner: ^2.4.15
+  flutter_launcher_icons: ^0.14.3
   build_verify: ^3.1.0
 flutter:
   uses-material-design: true
@@ -48,6 +49,13 @@ custom_lint:
   rules:
     - provider_parameters
     - missing_provider_annotation
+flutter_launcher_icons:
+  image_path_android: "resources/icons/launch_icon.png"
+  image_path_ios: "resources/icons/launch_icon.png"
+  android: true
+  ios: true
+  min_sdk_android: 21
+  remove_alpha_ios: true
 targets:
   $default:
     builder:

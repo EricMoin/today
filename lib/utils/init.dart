@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:tiny_weather/local/adapter/hive_registrar.g.dart';
-import 'package:tiny_weather/local/storage/local_storage.dart';
-import 'package:tiny_weather/utils/notification_solver.dart';
+import 'package:today/local/adapter/hive_registrar.g.dart';
+import 'package:today/local/storage/local_storage.dart';
+import 'package:today/utils/notification_solver.dart';
 
 class InitApp{
   static late String temporaryPath;

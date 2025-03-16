@@ -3,16 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:tiny_weather/features/components/ink_container.dart';
-import 'package:tiny_weather/features/home/providers/plan_provider.dart';
-import 'package:tiny_weather/features/home/providers/todo_provider.dart';
-import 'package:tiny_weather/local/model/info.dart';
-import 'package:tiny_weather/local/model/plan.dart';
-import 'package:tiny_weather/local/model/todo.dart';
-import 'package:tiny_weather/mock/mock.dart';
-import 'package:tiny_weather/router/route_data.dart';
+import 'package:today/features/components/ink_container.dart';
+import 'package:today/features/home/providers/plan_provider.dart';
+import 'package:today/features/home/providers/todo_provider.dart';
+import 'package:today/local/model/info.dart';
+import 'package:today/local/model/plan.dart';
+import 'package:today/local/model/todo.dart';
+import 'package:today/mock/mock.dart';
+import 'package:today/router/route_data.dart';
 import 'package:uuid/uuid.dart';
-import 'package:tiny_weather/local/storage/local_storage.dart';
+import 'package:today/local/storage/local_storage.dart';
 
 class EditPlanScreen extends ConsumerStatefulWidget {
   const EditPlanScreen({super.key});

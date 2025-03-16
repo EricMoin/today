@@ -2,17 +2,16 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tiny_weather/features/edit/pages/edit_select_screen.dart';
-import 'package:tiny_weather/features/edit/pages/edit_todo_screen.dart';
-import 'package:tiny_weather/features/edit/pages/edit_flow_screen.dart';
-import 'package:tiny_weather/features/edit/pages/edit_plan_screen.dart';
-import 'package:tiny_weather/features/error/error_screen.dart';
-import 'package:tiny_weather/features/home/pages/flow_detail_screen.dart';
-import 'package:tiny_weather/features/home/pages/todo_detail_screen.dart';
-import 'package:tiny_weather/features/home/pages/plan_detail_screen.dart';
-import 'package:tiny_weather/features/user/user_screen.dart';
-import 'package:tiny_weather/main_screen.dart';
-import 'package:tiny_weather/features/home/home_screen.dart';
+import 'package:today/features/edit/pages/edit_select_screen.dart';
+import 'package:today/features/edit/pages/edit_todo_screen.dart';
+import 'package:today/features/edit/pages/edit_flow_screen.dart';
+import 'package:today/features/edit/pages/edit_plan_screen.dart';
+import 'package:today/features/error/error_screen.dart';
+import 'package:today/features/home/pages/flow_detail_screen.dart';
+import 'package:today/features/home/pages/todo_detail_screen.dart';
+import 'package:today/features/home/pages/plan_detail_screen.dart';
+import 'package:today/main_screen.dart';
+import 'package:today/features/home/home_screen.dart';
 
 // This part declaration will be used by the code generator
 part 'route_data.g.dart';
@@ -57,11 +56,6 @@ class EditPlanRoute extends GoRouteData{
   Widget build(BuildContext context,GoRouterState state) => EditPlanScreen();
 }
 
-class UserScreenRoute extends GoRouteData {
-  const UserScreenRoute();
-  @override
-  Widget build(BuildContext context, GoRouterState state) => UserScreen();
-}
 
 @TypedGoRoute<TodoDetailScreenRoute>(path: '/todo/:uuid')
 class TodoDetailScreenRoute extends GoRouteData {

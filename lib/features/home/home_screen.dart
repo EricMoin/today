@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tiny_weather/features/home/components/flow_card.dart';
-import 'package:tiny_weather/features/home/components/plan_card.dart';
-import 'package:tiny_weather/features/home/components/state_count_panel.dart';
-import 'package:tiny_weather/features/home/components/switch_type_button.dart';
-import 'package:tiny_weather/features/home/components/todo_card.dart';
-import 'package:tiny_weather/features/home/providers/flow_provider.dart';
-import 'package:tiny_weather/features/home/providers/plan_provider.dart';
-import 'package:tiny_weather/features/home/providers/todo_provider.dart';
-import 'package:tiny_weather/provider/global_provider.dart';
-import 'package:tiny_weather/router/route_data.dart';
-import 'package:tiny_weather/utils/notification_solver.dart';
-import 'package:tiny_weather/utils/permission_solver.dart';
+import 'package:today/features/home/components/flow_card.dart';
+import 'package:today/features/home/components/plan_card.dart';
+import 'package:today/features/home/components/state_count_panel.dart';
+import 'package:today/features/home/components/switch_type_button.dart';
+import 'package:today/features/home/components/todo_card.dart';
+import 'package:today/features/home/providers/flow_provider.dart';
+import 'package:today/features/home/providers/plan_provider.dart';
+import 'package:today/features/home/providers/todo_provider.dart';
+import 'package:today/provider/global_provider.dart';
+import 'package:today/router/route_data.dart';
+import 'package:today/utils/notification_solver.dart';
+import 'package:today/utils/permission_solver.dart';
 
 class HomeScreen extends ConsumerWidget {
   late ThemeData theme;

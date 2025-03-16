@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tiny_weather/extensions/extension.dart';
-import 'package:tiny_weather/features/home/components/task_progress_indicator.dart';
-import 'package:tiny_weather/features/home/providers/todo_provider.dart';
-import 'package:tiny_weather/local/model/info.dart';
-import 'package:tiny_weather/local/model/todo.dart';
+import 'package:today/extensions/extension.dart';
+import 'package:today/features/home/components/task_progress_indicator.dart';
+import 'package:today/features/home/providers/todo_provider.dart';
+import 'package:today/local/model/info.dart';
+import 'package:today/local/model/todo.dart';
 import 'package:intl/intl.dart';
 
 class TodoDetailScreen extends ConsumerStatefulWidget {

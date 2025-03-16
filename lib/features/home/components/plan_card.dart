@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tiny_weather/constant/theme.dart';
-import 'package:tiny_weather/features/components/ink_container.dart';
-import 'package:tiny_weather/local/model/info.dart';
-import 'package:tiny_weather/local/model/plan.dart';
+import 'package:today/constant/theme.dart';
+import 'package:today/features/components/ink_container.dart';
+import 'package:today/local/model/info.dart';
+import 'package:today/local/model/plan.dart';
 
 class PlanCard extends StatelessWidget {
   final Plan plan;

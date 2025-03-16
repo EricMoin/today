@@ -1,7 +1,7 @@
 import 'package:hive_ce_flutter/adapters.dart';
 import 'package:logger/logger.dart';
-import 'package:tiny_weather/local/model/info.dart';
-import 'package:tiny_weather/local/model/todo.dart';
+import 'package:today/local/model/info.dart';
+import 'package:today/local/model/todo.dart';
 /// Todo可以组成一个Flow
 /// 只有所有的Todo被完成了，才能把当前Flow视为完成
 class Flow extends BaseInfo{

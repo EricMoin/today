@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tiny_weather/constant/theme.dart';
-import 'package:tiny_weather/local/model/info.dart';
+import 'package:today/constant/theme.dart';
+import 'package:today/local/model/info.dart';
 
 class TodoProgressIndicator extends StatelessWidget {
   late ThemeData theme;
