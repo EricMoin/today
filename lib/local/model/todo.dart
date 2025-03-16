@@ -27,9 +27,14 @@ class Todo extends BaseInfo {
     /// Todo 的时间还没开始
     if( now.isBefore(startTime) ){
       state = BaseState.intialized();
+      return;
+    }
+    if( now.isAfter(startTime) && now.isBefore(endTime) ){
+      state = BaseState.enabled();
+      return;
     }
     /// 由于[finished]的状态需要手动确定
     /// 所以这里直接就可以看作生效中
-    state = BaseState.enabled();
+    state = BaseState.intialized();
   }
 }

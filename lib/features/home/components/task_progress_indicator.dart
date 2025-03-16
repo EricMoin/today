@@ -16,9 +16,11 @@ class TodoProgressIndicator extends StatelessWidget {
     var color = theme.colorScheme.primary;
     switch (state.state) {
       case BaseState.fail:
+        progress = 1;
         color = theme.colorScheme.error;
         break;
       case BaseState.finish:
+        progress = 1;
         color = ZExtraTheme.finishedColor;
     }
     return SizedBox(

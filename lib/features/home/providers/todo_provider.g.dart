@@ -24,7 +24,7 @@ final isSelectedModeProvider = AutoDisposeProvider<bool>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef IsSelectedModeRef = AutoDisposeProviderRef<bool>;
-String _$finishedCountHash() => r'0bd146c4c59c7719a2258721f13f1a42da396e10';
+String _$finishedCountHash() => r'ebe6d646010bea7b4cc97758725dbc0bbc4db0aa';
 
 /// See also [finishedCount].
 @ProviderFor(finishedCount)
@@ -42,7 +42,7 @@ final finishedCountProvider = AutoDisposeProvider<int>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef FinishedCountRef = AutoDisposeProviderRef<int>;
-String _$enableCountHash() => r'a61b89c1622d87b8262973c4d04f3d1de53a4239';
+String _$enableCountHash() => r'34d463fec7fcd3cbf7ede0c73d0a840458177077';
 
 /// See also [enableCount].
 @ProviderFor(enableCount)
@@ -58,7 +58,7 @@ final enableCountProvider = AutoDisposeProvider<int>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef EnableCountRef = AutoDisposeProviderRef<int>;
-String _$failedCountHash() => r'85de304201a1cf3624fa260200c2f34ff99ac409';
+String _$failedCountHash() => r'e4c550bdc0d6d10ede7c83bfb119cf59d4e8a99e';
 
 /// See also [failedCount].
 @ProviderFor(failedCount)

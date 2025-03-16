@@ -1,4 +1,5 @@
 import 'package:hive_ce_flutter/adapters.dart';
+import 'package:logger/logger.dart';
 import 'package:tiny_weather/local/model/info.dart';
 import 'package:tiny_weather/local/model/todo.dart';
 /// Todo可以组成一个Flow
@@ -25,7 +26,6 @@ class Flow extends BaseInfo{
   /// 5.disabled + X       => failed
   /// 6.initial            => initial
   void updateState(){
-    int length = todos.length;
     var now = DateTime.now().millisecondsSinceEpoch;
     /// 还未到开始时间
     if( now < startAt ){
@@ -37,15 +37,9 @@ class Flow extends BaseInfo{
       state = BaseState.failed();
       return;
     }
-
-    /// 在开始和结束之间
-    if( now > startAt && now < endAt ){
-      state = BaseState.enabled();
-      return;
-    }
-
+    
     /// 当且仅当所有的Todo完成时才算完成当前Flow
-    state = todos.every((e) => e.state.isFinished) ? BaseState.finished() : state;
+    state = todos.every((e) => e.state.isFinished) ? BaseState.finished() : BaseState.enabled();
     return;
   }
 }

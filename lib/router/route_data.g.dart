@@ -14,6 +14,7 @@ List<RouteBase> get $appRoutes => [
   $editPlanRoute,
   $todoDetailScreenRoute,
   $flowDetailScreenRoute,
+  $planDetailScreenRoute,
   $errorScreenRoute,
 ];
 
@@ -159,6 +160,29 @@ extension $FlowDetailScreenRouteExtension on FlowDetailScreenRoute {
 
   String get location =>
       GoRouteData.$location('/flow/${Uri.encodeComponent(uuid)}');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $planDetailScreenRoute => GoRouteData.$route(
+  path: '/plan/:uuid',
+
+  factory: $PlanDetailScreenRouteExtension._fromState,
+);
+
+extension $PlanDetailScreenRouteExtension on PlanDetailScreenRoute {
+  static PlanDetailScreenRoute _fromState(GoRouterState state) =>
+      PlanDetailScreenRoute(uuid: state.pathParameters['uuid']!);
+
+  String get location =>
+      GoRouteData.$location('/plan/${Uri.encodeComponent(uuid)}');
 
   void go(BuildContext context) => context.go(location);
 

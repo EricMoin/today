@@ -15,6 +15,8 @@ class InkContainer extends StatelessWidget{
   void Function()? onTap;
   void Function()? onDoubleTap;
   void Function()? onLongPress;
+  Duration? duration;
+  Curve? curve;
   InkContainer({super.key, 
     this.borderRadius,
     this.alignment,
@@ -30,10 +32,14 @@ class InkContainer extends StatelessWidget{
     this.onTap,
     this.onDoubleTap,
     this.onLongPress,
+    this.duration,
+    this.curve,
   });
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: duration ?? Duration(milliseconds: 300),
+      curve: curve ?? Curves.easeInOut,
       margin: margin ?? EdgeInsets.zero,
       height: height,
       width: width,

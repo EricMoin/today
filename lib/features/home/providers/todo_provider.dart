@@ -2,6 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tiny_weather/features/home/components/switch_type_button.dart';
+import 'package:tiny_weather/features/home/providers/flow_provider.dart';
+import 'package:tiny_weather/features/home/providers/plan_provider.dart';
 import 'package:tiny_weather/local/key/local_key.dart';
 import 'package:tiny_weather/local/model/info.dart';
 import 'package:tiny_weather/local/storage/local_storage.dart';
@@ -17,8 +19,6 @@ class SwitchType extends _$SwitchType{
     state = (state + 1)%SwitchTypeEnum.values.length;
   }
 }
-
-
 
 @riverpod
 class TodoList extends _$TodoList {
@@ -72,6 +72,7 @@ class TodoList extends _$TodoList {
     save();
   }
 }
+
 @riverpod
 class SelectedList extends _$SelectedList {
   @override
@@ -97,39 +98,36 @@ bool isSelectedMode (Ref ref) {
 
 @riverpod
 int finishedCount (Ref ref){
-  var counter = 0;
-  var list = ref.watch(todoListProvider);
-  var length = list.length;
-  for( var index = 0; index < length; ++index ){
-    if(list[index].state.isFinished){
-      ++counter;
-    }
+  switch(SwitchTypeEnum.values[ref.watch(switchTypeProvider)]){
+    case SwitchTypeEnum.todo:
+      return ref.watch(todoListProvider).where((e) => e.state.isFinished).length;
+    case SwitchTypeEnum.flow:
+      return ref.watch(flowListProvider).where((e) => e.state.isFinished).length;
+    case SwitchTypeEnum.plan:
+      return ref.watch(planListProvider).where((e) => e.state.isFinished).length;
   }
-  return counter;
 }
 
 @riverpod
 int enableCount (Ref ref){
-  var counter = 0;
-  var list = ref.watch(todoListProvider);
-  var length = list.length;
-  for( var index = 0; index < length; ++index ){
-    if(list[index].state.isEnabled){
-      ++counter;
-    }
+  switch(SwitchTypeEnum.values[ref.watch(switchTypeProvider)]){
+    case SwitchTypeEnum.todo:
+      return ref.watch(todoListProvider).where((e) => e.state.isEnabled).length;
+    case SwitchTypeEnum.flow:
+      return ref.watch(flowListProvider).where((e) => e.state.isEnabled).length;
+    case SwitchTypeEnum.plan:
+      return ref.watch(planListProvider).where((e) => e.state.isEnabled).length;
   }
-  return counter;
 }
 
 @riverpod
 int failedCount (Ref ref){
-  var counter = 0;
-  var list = ref.watch(todoListProvider);
-  var length = list.length;
-  for( var index = 0; index < length; ++index ){
-    if(list[index].state.isFailed){
-      ++counter;
-    }
+  switch(SwitchTypeEnum.values[ref.watch(switchTypeProvider)]){
+    case SwitchTypeEnum.todo:
+      return ref.watch(todoListProvider).where((e) => e.state.isFailed).length;
+    case SwitchTypeEnum.flow:
+      return ref.watch(flowListProvider).where((e) => e.state.isFailed).length;
+    case SwitchTypeEnum.plan:
+      return ref.watch(planListProvider).where((e) => e.state.isFailed).length;
   }
-  return counter;
 }

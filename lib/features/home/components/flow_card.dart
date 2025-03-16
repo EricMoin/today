@@ -111,10 +111,12 @@ class _FlowCardState extends State<FlowCard> {
                             widget.flow.todos.map((e) {
                               return ListTile(
                                 // contentPadding: EdgeInsets.all(0),
-                                leading: Icon(Icons.adjust_rounded),
+                                leading: Icon(Icons.adjust_rounded,color: widget.flow.state.isFinished ? Colors.white : null,),
                                 title: Text(
                                   e.title,
-                                  style: theme.textTheme.titleMedium,
+                                  style: theme.textTheme.titleMedium?.copyWith(
+                                    color: widget.flow.state.isFinished ? Colors.white : null,
+                                  ),
                                 ),
                               );
                             }).toList(),

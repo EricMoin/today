@@ -9,6 +9,7 @@ import 'package:tiny_weather/features/edit/pages/edit_plan_screen.dart';
 import 'package:tiny_weather/features/error/error_screen.dart';
 import 'package:tiny_weather/features/home/pages/flow_detail_screen.dart';
 import 'package:tiny_weather/features/home/pages/todo_detail_screen.dart';
+import 'package:tiny_weather/features/home/pages/plan_detail_screen.dart';
 import 'package:tiny_weather/features/user/user_screen.dart';
 import 'package:tiny_weather/main_screen.dart';
 import 'package:tiny_weather/features/home/home_screen.dart';
@@ -92,6 +93,18 @@ class FlowDetailScreenRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return FlowDetailScreen(uuid: uuid);
+  }
+}
+
+@TypedGoRoute<PlanDetailScreenRoute>(path: '/plan/:uuid')
+class PlanDetailScreenRoute extends GoRouteData {
+  final String uuid;
+
+  const PlanDetailScreenRoute({required this.uuid});
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return PlanDetailScreen(uuid: uuid);
   }
 }
 

@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tiny_weather/features/home/components/flow_card.dart';
+import 'package:tiny_weather/features/home/components/plan_card.dart';
 import 'package:tiny_weather/features/home/components/state_count_panel.dart';
 import 'package:tiny_weather/features/home/components/switch_type_button.dart';
 import 'package:tiny_weather/features/home/components/todo_card.dart';
 import 'package:tiny_weather/features/home/providers/flow_provider.dart';
+import 'package:tiny_weather/features/home/providers/plan_provider.dart';
 import 'package:tiny_weather/features/home/providers/todo_provider.dart';
 import 'package:tiny_weather/provider/global_provider.dart';
 import 'package:tiny_weather/router/route_data.dart';
+import 'package:tiny_weather/utils/notification_solver.dart';
+import 'package:tiny_weather/utils/permission_solver.dart';
 
 class HomeScreen extends ConsumerWidget {
   late ThemeData theme;
@@ -16,11 +20,15 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     theme = Theme.of(context);
+    PermissionSolver.init();
+
+
     var todos = ref.watch(todoListProvider);
     var selectedList = ref.watch(selectedListProvider);
     var isSelected = ref.watch(isSelectedModeProvider);
     var switchType = SwitchTypeEnum.values[ref.watch(switchTypeProvider)];
     var flows = ref.watch(flowListProvider);
+    var plans = ref.watch(planListProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -65,6 +73,7 @@ class HomeScreen extends ConsumerWidget {
         shape: CircleBorder(),
         elevation: 0,
         onPressed: () {
+          // NotificationSolver.testNotification();
           EditScreenSelectRoute().push(context);
         },
         child: const Icon(Icons.edit),
@@ -133,7 +142,9 @@ class HomeScreen extends ConsumerWidget {
                 ),
               ),
             ),
-            SliverPadding(
+            SliverOffstage(
+              offstage: switchType != SwitchTypeEnum.flow,
+              sliver: SliverPadding(
                 padding: EdgeInsets.all(15),
                 sliver: SliverList.separated(
                   itemCount: flows.length,
@@ -174,7 +185,7 @@ class HomeScreen extends ConsumerWidget {
                         } else {
                           ref
                               .read(flowListProvider.notifier)
-                              .update(index);
+                              .updateFlowState(index);
                         }
                       },
                     );
@@ -184,6 +195,49 @@ class HomeScreen extends ConsumerWidget {
                   },
                 ),
               ),
+            ),
+            SliverOffstage(
+              offstage: switchType != SwitchTypeEnum.plan,
+              sliver: SliverPadding(
+                padding: EdgeInsets.all(15),
+                sliver: SliverList.separated(
+                  itemCount: plans.length,
+                  itemBuilder: (context, index) {
+                    return PlanCard(
+                      plan: plans[index],
+                      isSelected: selectedList.contains(plans[index].uuid),
+                      onTap: () {
+                        if (isSelected) {
+                          if (selectedList.contains(plans[index].uuid)) {
+                            ref
+                                .read(selectedListProvider.notifier)
+                                .remove(plans[index].uuid);
+                          } else {
+                            ref
+                                .read(selectedListProvider.notifier)
+                                .add(plans[index].uuid);
+                          }
+                        } else {
+                          PlanDetailScreenRoute(
+                            uuid: plans[index].uuid,
+                          ).push(context);
+                        }
+                      },
+                      onLongPress: () {
+                        if (!selectedList.contains(plans[index].uuid)) {
+                          ref
+                              .read(selectedListProvider.notifier)
+                              .add(plans[index].uuid);
+                        }
+                      },
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(height: 10);
+                  },
+                ),
+              ),
+            ),
           ],
         ),
       ),

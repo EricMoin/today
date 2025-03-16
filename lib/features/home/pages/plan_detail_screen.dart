@@ -3,38 +3,28 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tiny_weather/extensions/extension.dart';
 import 'package:tiny_weather/features/home/components/task_progress_indicator.dart';
+import 'package:tiny_weather/features/home/providers/plan_provider.dart';
 import 'package:tiny_weather/features/home/providers/todo_provider.dart';
 import 'package:tiny_weather/local/model/info.dart';
+import 'package:tiny_weather/local/model/plan.dart';
 import 'package:tiny_weather/local/model/todo.dart';
 import 'package:intl/intl.dart';
 
-class TodoDetailScreen extends ConsumerStatefulWidget {
+class PlanDetailScreen extends ConsumerStatefulWidget {
   String uuid;
-  TodoDetailScreen({super.key, required this.uuid});
+  PlanDetailScreen({super.key, required this.uuid});
   
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _TodoDetailScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _PlanDetailScreenState();
 }
-class _TodoDetailScreenState extends ConsumerState<TodoDetailScreen>{
+class _PlanDetailScreenState extends ConsumerState<PlanDetailScreen>{
   late ThemeData theme;
   @override
   Widget build(BuildContext context) {
     theme = Theme.of(context);
-    var todo = ref.watch(todoListProvider.notifier).getTodo(widget.uuid);
+    var plan = ref.watch(planListProvider.notifier).getPlan(widget.uuid);
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          if( todo.state.isEnabled )
-          IconButton(
-            icon: Icon(Icons.check),
-            onPressed: (){
-              ref.read(todoListProvider.notifier).finishedTodo(
-                ref.watch(todoListProvider).indexOf(todo)
-              );
-            },
-          ),
-          // const SizedBox(width: 10,),
-        ],
       ),
       body: Center(
         child: LayoutBuilder(
@@ -44,7 +34,7 @@ class _TodoDetailScreenState extends ConsumerState<TodoDetailScreen>{
               width: width * 0.9,
               child: CustomScrollView(
                 physics: const BouncingScrollPhysics(),
-                slivers: [SliverToBoxAdapter(child: _TodoInfoCard(todo: todo))],
+                slivers: [SliverToBoxAdapter(child: _PlanInfoCard(plan: plan))],
               ),
             );
           },
@@ -54,10 +44,10 @@ class _TodoDetailScreenState extends ConsumerState<TodoDetailScreen>{
   }
 }
 
-class _TodoInfoCard extends StatelessWidget {
-  Todo todo;
+class _PlanInfoCard extends StatelessWidget {
+  Plan plan;
   late ThemeData theme;
-  _TodoInfoCard({required this.todo});
+  _PlanInfoCard({required this.plan});
   @override
   Widget build(BuildContext context) {
     theme = Theme.of(context);
@@ -71,10 +61,10 @@ class _TodoInfoCard extends StatelessWidget {
         children: [
           Center(
             child: TodoProgressIndicator(
-              startAt: todo.startAt,
-              endAt: todo.endAt,
-              progress: (todo.endAt == todo.startAt) ? 0 : (DateTime.now().millisecondsSinceEpoch - todo.startAt) / (todo.endAt - todo.startAt),
-              state: todo.state,
+              startAt: plan.startAt,
+              endAt: plan.endAt,
+              progress: (plan.endAt == plan.startAt) ? 0 : (DateTime.now().millisecondsSinceEpoch - plan.startAt) / (plan.endAt - plan.startAt),
+              state: plan.state,
             ),
           ),
           Text(
@@ -84,7 +74,7 @@ class _TodoInfoCard extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text(todo.title, style: theme.textTheme.bodyMedium?.copyWith()),
+          Text(plan.title, style: theme.textTheme.bodyMedium?.copyWith()),
           const SizedBox.shrink(),
           Text(
             '✍️  Job',
@@ -93,7 +83,7 @@ class _TodoInfoCard extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text(todo.content, style: theme.textTheme.bodyMedium?.copyWith()),
+          Text(plan.content, style: theme.textTheme.bodyMedium?.copyWith()),
           const SizedBox.shrink(),
           Text(
             '🕒  Period',
@@ -102,18 +92,33 @@ class _TodoInfoCard extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          LinearProgressIndicator(value: todo.state.isFinished ? 1 : todo.endAt == todo.startAt ? 0 : (DateTime.now().millisecondsSinceEpoch - todo.startAt) / (todo.endAt - todo.startAt)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Trigger Time',
+                style: theme.textTheme.titleSmall,
+              ),
+              Text(
+                DateFormat.jms().format(DateTime.fromMillisecondsSinceEpoch(plan.triggerTime)),
+                style: theme.textTheme.titleSmall?.copyWith(
+                  color: theme.colorScheme.primary
+                ),
+              ),
+            ],
+          ),
+          LinearProgressIndicator(value: plan.state.isFinished ? 1 : plan.endAt == plan.startAt ? 0 : (DateTime.now().millisecondsSinceEpoch - plan.triggerTime) / (plan.endAt - plan.startAt)),
           Row(
             children: [
               Text(
-                todo.startAt.dateTime,
+                plan.startAt.dateTime,
                 style: theme.textTheme.titleSmall?.copyWith(
                   color: theme.colorScheme.primary
                 ),
               ),
               Expanded(child: const SizedBox()),
               Text(
-                todo.endAt.dateTime,
+                plan.endAt.dateTime,
                 style: theme.textTheme.titleSmall?.copyWith(
                   color: theme.colorScheme.primary
                 ),

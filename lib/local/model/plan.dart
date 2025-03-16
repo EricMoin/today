@@ -16,4 +16,23 @@ class Plan extends BaseInfo {
     super.title,
     super.content,
   });
+
+  void updateState(){
+    if(state.isFinished){
+      return;
+    }
+    var now = DateTime.now().millisecondsSinceEpoch;
+    if(now > startAt && now < endAt){
+      state = BaseState.enabled();
+      return;
+    }
+    if(now > endAt){
+      state = BaseState.finished();
+      return;
+    }
+    if(now < startAt){
+      state = BaseState.intialized();
+      return;
+    }
+  }
 }

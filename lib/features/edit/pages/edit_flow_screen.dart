@@ -21,8 +21,8 @@ class _EditFlowScreenState extends ConsumerState<EditFlowScreen> {
   late ThemeData theme;
   late TextEditingController _titleEditingController;
   List<Todo> todos = [];
-  DateTime startTime = DateTime.now();
-  DateTime endTime = DateTime.now();
+  DateTime startTime = DateTime.parse(DateFormat('yyyy-MM-dd').format(DateTime.now()));
+  DateTime endTime = DateTime.parse(DateFormat('yyyy-MM-dd').format(DateTime.now()));
   @override
   void initState() {
     super.initState();
@@ -77,8 +77,8 @@ class _EditFlowScreenState extends ConsumerState<EditFlowScreen> {
                         title: _titleEditingController.text,
                         firstCreateTime: DateTime.now().millisecondsSinceEpoch,
                         lastModifiedTime: DateTime.now().millisecondsSinceEpoch,
-                        startAt: startTime.millisecondsSinceEpoch,
-                        endAt: endTime.millisecondsSinceEpoch,
+                        startAt: DateTime.parse(DateFormat('yyyy-MM-dd').format(startTime)).millisecondsSinceEpoch,
+                        endAt: DateTime.parse(DateFormat('yyyy-MM-dd').format(endTime)).millisecondsSinceEpoch,
                         todos: todos,
                         state: BaseState.intialized(),
                       ),
@@ -162,7 +162,7 @@ class _EditFlowScreenState extends ConsumerState<EditFlowScreen> {
                             final DateTime? picked = await showDatePicker(
                               context: context,
                               initialDate: endTime,
-                              firstDate: DateTime(1900),
+                              firstDate: endTime,
                               lastDate: DateTime.now().add(
                                 Duration(days: 3600),
                               ),

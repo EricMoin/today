@@ -3,14 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:tiny_weather/features/components/ink_container.dart';
 import 'package:tiny_weather/features/home/providers/todo_provider.dart';
 import 'package:tiny_weather/local/model/info.dart';
 import 'package:tiny_weather/local/model/todo.dart';
-import 'package:tiny_weather/mock/mock.dart';
-import 'package:tiny_weather/router/route_data.dart';
 import 'package:uuid/uuid.dart';
-import 'package:tiny_weather/local/storage/local_storage.dart';
 
 class EditTodoScreen extends ConsumerStatefulWidget {
   const EditTodoScreen({super.key});
@@ -23,8 +19,8 @@ class _EditTodoScreenState extends ConsumerState<EditTodoScreen> {
   late ThemeData theme;
   late TextEditingController _titleEditingController;
   late TextEditingController _bodyEditingController;
-  DateTime startTime = DateTime.now();
-  DateTime endTime = DateTime.now();
+  DateTime startTime = DateTime.parse(DateFormat('yyyy-MM-dd').format(DateTime.now()));
+  DateTime endTime = DateTime.parse(DateFormat('yyyy-MM-dd').format(DateTime.now()));
   @override
   void initState() {
     super.initState();
@@ -82,8 +78,8 @@ class _EditTodoScreenState extends ConsumerState<EditTodoScreen> {
                         content: _bodyEditingController.text,
                         firstCreateTime: DateTime.now().millisecondsSinceEpoch,
                         lastModifiedTime: DateTime.now().millisecondsSinceEpoch,
-                        startAt: startTime.millisecondsSinceEpoch,
-                        endAt: endTime.millisecondsSinceEpoch,
+                        startAt: DateTime.parse(DateFormat('yyyy-MM-dd').format(startTime)).millisecondsSinceEpoch,
+                        endAt: DateTime.parse(DateFormat('yyyy-MM-dd').format(endTime)).millisecondsSinceEpoch,
                         state: BaseState.intialized(),
                       ),
                     );
@@ -149,7 +145,7 @@ class _EditTodoScreenState extends ConsumerState<EditTodoScreen> {
                             final DateTime? picked = await showDatePicker(
                               context: context,
                               initialDate: startTime,
-                              firstDate: DateTime.now(),
+                              firstDate: startTime,
                               lastDate: DateTime.now().add(
                                 Duration(days: 3600),
                               ),
@@ -179,7 +175,7 @@ class _EditTodoScreenState extends ConsumerState<EditTodoScreen> {
                             final DateTime? picked = await showDatePicker(
                               context: context,
                               initialDate: endTime,
-                              firstDate: DateTime(1900),
+                              firstDate: endTime,
                               lastDate: DateTime.now().add(
                                 Duration(days: 3600),
                               ),

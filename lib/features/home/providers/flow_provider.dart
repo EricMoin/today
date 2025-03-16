@@ -1,3 +1,5 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/web.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tiny_weather/local/key/local_key.dart';
 import 'package:tiny_weather/local/model/flow.dart';
@@ -20,12 +22,13 @@ class FlowList extends _$FlowList {
     updatedList.firstWhere((e) => e.uuid == flowId).todos.firstWhere((e) => e.uuid == todoId).updateState();
     updatedList.firstWhere((e) => e.uuid == flowId).updateState();
     state = updatedList;
-    
     save();
   }
   void finishedTodo(String flowId,String todoId) {
     final updatedList = [...state];
     updatedList.firstWhere((e) => e.uuid == flowId).todos.firstWhere((e) => e.uuid == todoId).state = BaseState.finished();
+    updatedList.firstWhere((e) => e.uuid == flowId).updateState();
+    Logger().i(updatedList.firstWhere((e) => e.uuid == flowId).state.state);
     state = updatedList;
     save();
   }
@@ -35,6 +38,7 @@ class FlowList extends _$FlowList {
   void finishedFlow(String uuid){
     final updatedList = [...state];
     updatedList.firstWhere((e) => e.uuid == uuid).state = BaseState.finished();
+    updatedList.firstWhere((e) => e.uuid == uuid).todos.forEach((e) => e.state = BaseState.finished());
     state = updatedList;
     save();
   }
@@ -44,25 +48,69 @@ class FlowList extends _$FlowList {
     state = updatedList;
     save();
   }
-  void update(int index) {
+  void updateFlowState(int index) {
     final updatedList = [...state];
     updatedList[index].updateState();
     state = updatedList;
     save();
-  }
-  Flow getFlow(String uuid){
-    return state.firstWhere((e) => e.uuid == uuid);
   }
   void add(Flow flow){
     flow.updateState();
     state.add(flow);
     save();
   }
-  void updateFlowState(int index){
-    state[index].updateState();
-    save();
-  }
   void save(){
     LocalStorage.put(key: BoxKey.flows,data: state);
   }
+  void updateFlow(Flow updatedFlow) {
+    final updatedList = [...state];
+    final index = updatedList.indexWhere((e) => e.uuid == updatedFlow.uuid);
+    if (index != -1) {
+      updatedList[index] = updatedFlow;
+      state = updatedList;
+      save();
+    }
+  }
+  void updateCurrentFlow(String flowId, void Function(Flow flow) updater) {
+    final updatedList = [...state];
+    final index = updatedList.indexWhere((e) => e.uuid == flowId);
+    if (index != -1) {
+      final flow = updatedList[index];
+      updater(flow);
+      state = updatedList;
+      save();
+    }
+  }
 }
+@riverpod
+class CurrentFlow extends _$CurrentFlow {
+  @override
+  Flow build({
+    required String uuid,
+  }) {
+    Logger().i("[BUILD]: ${ ref.watch(flowListProvider).firstWhere((e) => e.uuid == uuid).state.state}");
+    return ref.watch(flowListProvider).firstWhere((e) => e.uuid == uuid);
+  }
+  void update() {
+    ref.read(flowListProvider.notifier).updateCurrentFlow(
+      uuid,
+      (flow) => flow.updateState(),
+    );
+  }
+  void finishedTodo(String todoId) {
+    ref.read(flowListProvider.notifier).updateCurrentFlow(
+      uuid,
+      (flow) {
+        flow.todos.firstWhere((e) => e.uuid == todoId).state = BaseState.finished();
+      },
+    );
+  }
+  void finished() {
+    ref.read(flowListProvider.notifier).finishedFlow(uuid);
+  }
+}
+@riverpod
+bool isCurrentFlowFinished(Ref ref,String uuid) {
+  return ref.watch(flowListProvider).firstWhere((e) => e.uuid == uuid).state.isFinished;
+}
+
